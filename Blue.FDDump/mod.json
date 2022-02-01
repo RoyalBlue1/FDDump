@@ -1,0 +1,9 @@
+{
+	"Name" : "Blue.FDDump",
+	"Description" : "Dumps Frontier Defense Events",
+	"Version": "1.0.0",
+	"LoadPriority": 1
+	
+	
+	
+}
