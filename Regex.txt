@@ -1,0 +1,7 @@
+Message ([\d\.]*)  Death id: (\-?[\d-]*)
+Message ([\d\.]*)  NewPropDynamic pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> model\: (\$\"[a-zA-Z\/_\.\d]*\")
+Message ([\d\.]*)  NewDropPod pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+Message ([\d\.]*)  NewDomeEntity pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+Message ([\d\.]*)  NewWeapon entID\: (\-?[\d-]*) weaponName\: ([a-zA-Z_\d]*)
+Message ([\d\.]*)  NewEntityTitan id\: (\-?[\d-]*) target\: ([a-zA-Z_ \d]*) pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+Message ([\d\.]*)  NewUncapturedEntity id\: (\-?[\d-]*) class\: (class)? ([a-zA-Z_ \d]*) target\: ([a-zA-Z_ \d]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d]*\") pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
