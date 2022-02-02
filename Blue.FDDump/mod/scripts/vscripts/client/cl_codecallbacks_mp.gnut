@@ -283,7 +283,7 @@ void function LogNewEntity(entity ent){
 			//log new weapon
 			entity entParent = ent.GetParent()
 			if(IsValid(entParent))
-				logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",ent.GetWeaponClassName())
+				thread PrintWeapon(ent) //else Weapons might get printed before Parents
 			return
 		
 	}
@@ -299,14 +299,11 @@ void function LogNewEntity(entity ent){
 	
 	
 }
-void function GetEntWeaons(entity ent)
-{
-	foreach(entity weapon in ent.GetOffhandWeapons())
-	{
-		logFDt("EntityHasWeapon entId:",ent.GetEntIndex(),"weaponName",weapon.GetWeaponClassName())
-	}
-		
+void function PrintWeapon(entity weapon){
+	WaitFrame()
+	logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",ent.GetWeaponClassName())
 }
+
 
 string function getKVString(entity ent)
 {
