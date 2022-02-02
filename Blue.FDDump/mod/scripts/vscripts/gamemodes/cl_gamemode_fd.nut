@@ -87,17 +87,7 @@ table<string, void functionref(int,entity)> waveEndScoreEvents
 
 
 
-void function logFDt( ... )
-{
-	if ( vargc <= 0 )
-		return
 
-	var msg = "Message " + Time() + " "
-	for ( int i = 0; i < vargc; i++ )
-		msg = (msg + " " + vargv[i])
-
-	printl( msg )//TODO Replace with Rexx pipe
-}
 
 void function ClGamemodeFD_Init()
 {
@@ -191,7 +181,9 @@ void function ClGamemodeFD_Init()
 	RuiSetString( file.scoreboardWaveData, "waveString", "" )
 	RuiSetString( file.scoreboardWaveData, "levelName", GetMapDisplayName( GetMapName() ) )
 
+	
 }
+
 
 
 bool function AttemptDisplayTutorialTip( int tutorialBitIndex )
@@ -1456,7 +1448,7 @@ void function OnScoreEventGeneric( string scoreEvent )
 
 void function ServerCallback_FD_PingMinimap( float x, float y, float duration, float spreadRadius, float ringRadius, int colorIndex )
 {	
-	logFDt("PingMinimap pos:",x,y,"duration",duration,"spread:",spreadRadius,"ringRadius:",ringRadius,"color:",colorIndex)
+	logFDt("PingMinimap pos:",x,y,"duration:",duration,"spread:",spreadRadius,"ringRadius:",ringRadius,"color:",colorIndex)
 	vector origin = < x, y, 0 >
 	vector color = TEAM_COLOR_ENEMY
 	switch ( colorIndex )

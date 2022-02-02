@@ -35,6 +35,7 @@ global function ClientCodeCallback_SaveResumed
 global function ClientCodeCallback_OnSelectedWeaponChanged
 global function CodeCallback_CheckPassThroughAddsMods
 global function ClientCodeCallback_GetUseEntOverrideText
+global function logFDt
 
 
 
@@ -43,7 +44,7 @@ void function logFDt( ... )
 	if ( vargc <= 0 )
 		return
 
-	var msg = "Message " + Time() + " "
+	var msg = "FDMessage " + Time() + " "
 	for ( int i = 0; i < vargc; i++ )
 		msg = (msg + " " + vargv[i])
 
@@ -284,9 +285,7 @@ void function LogNewEntity(entity ent){
 			if(IsValid(entParent))
 				logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",ent.GetWeaponClassName())
 			return
-			
 		
-
 	}
 	
 
@@ -556,7 +555,7 @@ void function TrackEntity_threaded(entity ent)
 	
 	while(IsAlive(ent))
 	{
-		//logFDt("PosUpdate id:",EntId,"pos:",ent.GetOrigin(),"ang:",ent.GetAngles())
+		logFDt("PosUpdate id:",EntId,"pos:",ent.GetOrigin(),"ang:",ent.GetAngles())
 		
 		WaitFrame()
 	}
@@ -871,7 +870,7 @@ function RunKillReplayEndedCallbacks()
 void function ServerCallback_YouRespawned()
 {
 	clGlobal.levelEnt.Signal( "LocalClientPlayerRespawned" )
-
+	logFDt("PlayerDeath")
 	entity clientPlayer = GetLocalClientPlayer()
 	StopPlayerDeathSound( clientPlayer )
 

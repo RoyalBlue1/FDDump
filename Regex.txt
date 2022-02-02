@@ -1,7 +1,14 @@
-Message ([\d\.]*)  Death id: (\-?[\d-]*)
-Message ([\d\.]*)  NewPropDynamic pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> model\: (\$\"[a-zA-Z\/_\.\d]*\")
-Message ([\d\.]*)  NewDropPod pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
-Message ([\d\.]*)  NewDomeEntity pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
-Message ([\d\.]*)  NewWeapon entID\: (\-?[\d-]*) weaponName\: ([a-zA-Z_\d]*)
-Message ([\d\.]*)  NewEntityTitan id\: (\-?[\d-]*) target\: ([a-zA-Z_ \d]*) pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
-Message ([\d\.]*)  NewUncapturedEntity id\: (\-?[\d-]*) class\: (class)? ([a-zA-Z_ \d]*) target\: ([a-zA-Z_ \d]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d]*\") pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+FDMessage ([\d\.]*)  NewPropDynamic pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> model\: (\$\"[a-zA-Z\/_\.\d]*\")
+FDMessage ([\d\.]*)  Death id: (\-?[\d-]*)
+FDMessage ([\d\.]*)  NewDropPod pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  NewDomeEntity pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  NewWeapon entID\: (\-?[\d-]*) weaponName\: ([a-zA-Z_\d]*)
+FDMessage ([\d\.]*)  NewEntityTitan id\: (\-?[\d-]*) target\: ([a-zA-Z_ \d]*) pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+FDMessage ([\d\.]*)  NewUncapturedEntity id\: ([\d-]*) class\:( class)? ([a-zA-Z_ \d]*) target\: ([a-zA-Z_ \d]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d\*\?]*\") pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  NewEntityHuman id\: ([\d-]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d]*\") pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  PosUpdate id\: (-?\d*) pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  NewEntity id\: (\-?[\d-]*) class\: (class)? ([a-zA-Z_ \d]*) target\: ([a-zA-Z_ \d]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d\?\*]*\") pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
+FDMessage ([\d\.]*)  PingMinimap pos\: (-?[\.\d]*) (-?[\d\.]*) duration\:? (\d*) spread\: (\d*) ringRadius\: (\d*) color\: (\d*)
+FDMessage ([\d\.]*)  WaveContains waveNum\: (\d) type\: ([a-zA-Z_#]*) count\: ([\d]*)
+FDMessage ([\d\.]*)  WaveStarting wave\: (\d)
+FDMessage ([\d\.]*)  UpdateWaveInfo waveNum\: (\d) difficultyString\: ([a-zA-Z#_\d]*) waveString\: ([a-zA-Z#_\d ]*) levelName\: ([a-zA-Z#_\d]*)
