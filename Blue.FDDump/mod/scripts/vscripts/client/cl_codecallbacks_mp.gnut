@@ -281,9 +281,7 @@ void function LogNewEntity(entity ent){
 			return
 		case"weaponx":
 			//log new weapon
-			entity entParent = ent.GetParent()
-			if(IsValid(entParent))
-				thread PrintWeapon(ent) //else Weapons might get printed before Parents
+			thread PrintWeapon(ent) //else Weapons might get printed before Parents
 			return
 		
 	}
@@ -301,7 +299,9 @@ void function LogNewEntity(entity ent){
 }
 void function PrintWeapon(entity weapon){
 	WaitFrame()
-	logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",ent.GetWeaponClassName())
+	entity entParent = weapon.GetParent()
+	if(IsValid(entParent))
+		logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",weapon.GetWeaponClassName())
 }
 
 
