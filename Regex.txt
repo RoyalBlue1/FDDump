@@ -3,7 +3,7 @@ FDMessage ([\d\.]*)  Death id: (\-?[\d-]*)
 FDMessage ([\d\.]*)  NewDropPod pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
 FDMessage ([\d\.]*)  NewDomeEntity pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
 FDMessage ([\d\.]*)  NewWeapon entID\: (\-?[\d-]*) weaponName\: ([a-zA-Z_\d]*)
-FDMessage ([\d\.]*)  NewEntityTitan id\: (\-?[\d-]*) target\: ([a-zA-Z_ \d]*) pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
+FDMessage ([\d\.]*)  NewEntityTitan id\: (\-?[\d-]*) target\: ([a-zA-Z_ \d]*) team\: (\d) pos\: <([-\d.]*), ([-\d.]*), ([-\d.]*)> ang\: <([-\d.]*), ([-\d.]*), ([-\d.]*)>
 FDMessage ([\d\.]*)  NewUncapturedEntity id\: ([\d-]*) class\:( class)? ([a-zA-Z_ \d]*) target\: ([a-zA-Z_ \d]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d\*\?]*\") pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
 FDMessage ([\d\.]*)  NewEntityHuman id\: ([\d-]*) signifier\: ([a-zA-Z_ \d]*) model\: (\$\"[a-zA-Z_ \/\.\d]*\") pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
 FDMessage ([\d\.]*)  PosUpdate id\: (-?\d*) pos\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)> ang\: <([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*), ([-\d.]*e?-?[\d]*)>
