@@ -228,23 +228,8 @@ void function LogNewEntity(entity ent){
 	switch(ent.GetSignifierName())
 	{
 		
-		case"titan_soul":
-		case"info_hardpoint":
-		case"viewmodel":
-		case"item_titan_battery":
-		case"env_tonemap_controller":
-		case"predicted_first_person_proxy":
-		case"worldspawn":
-		case"sky_camera":
-		case"env_entity_dissolver": //all of those are hits to the harvester
-		case"grenade_frag": // player grenades
-		case"player":
-		case"first_person_proxy":
-		case"titan_cockpit":
-		case"npc_turret_sentry":
-		case"prop_physics":
-		case"script_prop":
-			return
+		case"trace_volume":
+			logFDt("TraceBlocker pos:",ent.GetOrigin())
 		case"prop_dynamic":
 			switch(ent.GetModelName())
 			{
@@ -283,7 +268,23 @@ void function LogNewEntity(entity ent){
 			//log new weapon
 			thread PrintWeapon(ent) //else Weapons might get printed before Parents
 			return
-		
+		case"titan_soul":
+		case"info_hardpoint":
+		case"viewmodel":
+		case"item_titan_battery":
+		case"env_tonemap_controller":
+		case"predicted_first_person_proxy":
+		case"worldspawn":
+		case"sky_camera":
+		case"env_entity_dissolver": //all of those are hits to the harvester
+		case"grenade_frag": // player grenades
+		case"player":
+		case"first_person_proxy":
+		case"titan_cockpit":
+		case"npc_turret_sentry":
+		case"prop_physics":
+		case"script_prop":
+			return
 	}
 	
 
