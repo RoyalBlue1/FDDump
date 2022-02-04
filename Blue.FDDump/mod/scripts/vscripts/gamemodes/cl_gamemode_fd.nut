@@ -181,7 +181,7 @@ void function ClGamemodeFD_Init()
 	RuiSetString( file.scoreboardWaveData, "waveString", "" )
 	RuiSetString( file.scoreboardWaveData, "levelName", GetMapDisplayName( GetMapName() ) )
 
-	
+	fdDumpInit()
 }
 
 
@@ -902,8 +902,7 @@ void function ServerCallback_FD_UpdateWaveInfo( int aiID0, int aiID1 = -1, int a
 	RuiSetString( file.scoreboardWaveData, "waveString", GetWaveStatusString( waveNum ) )
 	RuiSetString( file.scoreboardWaveData, "levelName", GetMapDisplayName( GetMapName() ) )
 
-	logFDt("UpdateWaveInfo waveNum:",waveNum,"difficultyString:",FD_GetDifficultyString(),"waveString:",GetWaveStatusString( waveNum ),"levelName:",GetMapName())
-
+	fdLogUpdateWaveInfo(waveNum,FD_GetDifficultyString(),GetWaveStatusString(waveNum),GetMapName())
 	int count = 0
 	foreach ( int aiID in aiIDs )
 	{
@@ -911,7 +910,8 @@ void function ServerCallback_FD_UpdateWaveInfo( int aiID0, int aiID1 = -1, int a
 		RuiSetImage( file.scoreboardWaveData, "icon" + (count), icon )
 		RuiSetImage( file.scoreboardWaveData, "emptyIcon" + (count), FD_GetGreyIconForAI_byAITypeID( aiID ) )
 		RuiTrackInt( file.scoreboardWaveData, "count" + (count), null, RUI_TRACK_SCRIPT_NETWORK_VAR_GLOBAL_INT, GetNetworkedVariableIndex( FD_GetAINetIndex_byAITypeID( aiID ) ) )
-		logFDt("WaveContains waveNum:",waveNum,"type:",FD_GetSquadDisplayName_byAITypeID(aiID),"count:",GetGlobalNetInt(FD_GetAINetIndex_byAITypeID( aiID )))
+		fdLogWaveContains(waveNum,FD_GetSquadDisplayName_byAITypeID(aiID),GetGlobalNetInt(FD_GetAINetIndex_byAITypeID( aiID )))
+		
 		count++
 	}
 }
@@ -1234,7 +1234,7 @@ void function FD_AnnounceWaveStart( entity ent, var info )
 
 	int currentWave = GetGlobalNetInt( "FD_currentWave" ) + 1
 	// ClGameState_SetInfoStatusText( GetWaveStatusString( currentWave ) )
-	logFDt("WaveStarting wave:",currentWave)
+	fdLogWaveStarting(currentWave)
 	thread FD_AnnounceWaveStart_Thread( currentWave )
 }
 
@@ -1316,7 +1316,7 @@ void function FD_AnnounceWaveStart_Music()
 
 void function FD_AnnounceWaveEnd( entity ent, var info )
 {	
-	logFDt("WaveComplete")
+	fdLogWaveComplete()
 	AnnouncementData announcement = Announcement_Create( "#FD_WAVE_COMPLETE" )
 	Announcement_SetSoundAlias( announcement,  "UI_InGame_CoOp_WaveSurvived" )
 	Announcement_SetStyle( announcement, ANNOUNCEMENT_STYLE_RESULTS )
@@ -1448,7 +1448,8 @@ void function OnScoreEventGeneric( string scoreEvent )
 
 void function ServerCallback_FD_PingMinimap( float x, float y, float duration, float spreadRadius, float ringRadius, int colorIndex )
 {	
-	logFDt("PingMinimap pos:",x,y,"duration:",duration,"spread:",spreadRadius,"ringRadius:",ringRadius,"color:",colorIndex)
+	fdLogPingMinimap( x, y, duration, spreadRadius, ringRadius, colorIndex)
+	
 	vector origin = < x, y, 0 >
 	vector color = TEAM_COLOR_ENEMY
 	switch ( colorIndex )
@@ -1486,7 +1487,8 @@ void function ServerCallback_FD_PingMinimap_Internal( vector origin, float durat
 }
 
 void function FD_WaveRestart( entity ent, var info )
-{
+{	
+	
 	AnnouncementData announcement = Announcement_Create( "#COOP_WAVE_RESTARTING" )
 	announcement.drawOverScreenFade = true
 	Announcement_SetSubText( announcement, GetRetryString( GetGlobalNetInt("FD_restartsRemaining") ) )
