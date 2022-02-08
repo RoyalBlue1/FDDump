@@ -902,7 +902,7 @@ void function ServerCallback_FD_UpdateWaveInfo( int aiID0, int aiID1 = -1, int a
 	RuiSetString( file.scoreboardWaveData, "waveString", GetWaveStatusString( waveNum ) )
 	RuiSetString( file.scoreboardWaveData, "levelName", GetMapDisplayName( GetMapName() ) )
 
-	fdLogUpdateWaveInfo(waveNum,FD_GetDifficultyString(),GetWaveStatusString(waveNum),GetMapName())
+	fdLogUpdateWaveInfo(waveNum,FD_GetDifficultyString(),GetWaveStatusString(waveNum),GetMapName(),Time())
 	int count = 0
 	foreach ( int aiID in aiIDs )
 	{
@@ -910,7 +910,7 @@ void function ServerCallback_FD_UpdateWaveInfo( int aiID0, int aiID1 = -1, int a
 		RuiSetImage( file.scoreboardWaveData, "icon" + (count), icon )
 		RuiSetImage( file.scoreboardWaveData, "emptyIcon" + (count), FD_GetGreyIconForAI_byAITypeID( aiID ) )
 		RuiTrackInt( file.scoreboardWaveData, "count" + (count), null, RUI_TRACK_SCRIPT_NETWORK_VAR_GLOBAL_INT, GetNetworkedVariableIndex( FD_GetAINetIndex_byAITypeID( aiID ) ) )
-		fdLogWaveContains(waveNum,FD_GetSquadDisplayName_byAITypeID(aiID),GetGlobalNetInt(FD_GetAINetIndex_byAITypeID( aiID )))
+		fdLogWaveContains(waveNum,FD_GetSquadDisplayName_byAITypeID(aiID),GetGlobalNetInt(FD_GetAINetIndex_byAITypeID( aiID )),Time())
 		
 		count++
 	}
@@ -1234,7 +1234,7 @@ void function FD_AnnounceWaveStart( entity ent, var info )
 
 	int currentWave = GetGlobalNetInt( "FD_currentWave" ) + 1
 	// ClGameState_SetInfoStatusText( GetWaveStatusString( currentWave ) )
-	fdLogWaveStarting(currentWave)
+	fdLogWaveStarting(currentWave,Time())
 	thread FD_AnnounceWaveStart_Thread( currentWave )
 }
 
@@ -1316,7 +1316,7 @@ void function FD_AnnounceWaveStart_Music()
 
 void function FD_AnnounceWaveEnd( entity ent, var info )
 {	
-	fdLogWaveComplete()
+	fdLogWaveComplete(Time())
 	AnnouncementData announcement = Announcement_Create( "#FD_WAVE_COMPLETE" )
 	Announcement_SetSoundAlias( announcement,  "UI_InGame_CoOp_WaveSurvived" )
 	Announcement_SetStyle( announcement, ANNOUNCEMENT_STYLE_RESULTS )
@@ -1448,7 +1448,7 @@ void function OnScoreEventGeneric( string scoreEvent )
 
 void function ServerCallback_FD_PingMinimap( float x, float y, float duration, float spreadRadius, float ringRadius, int colorIndex )
 {	
-	fdLogPingMinimap( x, y, duration, spreadRadius, ringRadius, colorIndex)
+	fdLogPingMinimap( x, y, duration, spreadRadius, ringRadius, colorIndex,Time())
 	
 	vector origin = < x, y, 0 >
 	vector color = TEAM_COLOR_ENEMY

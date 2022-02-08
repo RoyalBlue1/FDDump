@@ -22,108 +22,120 @@ global function PrintWeapon
 global function fdDumpInit
 global function LogNewEntity
 
-void function logFDt( ... )
+void function logFDt(float time, ... )
 {
 	if ( vargc <= 0 )
 		return
 
-	var msg = "FDMessage " + Time() + " "
+	var msg = "FDMessage " + time + " "
 	for ( int i = 0; i < vargc; i++ )
 		msg = (msg + " " + vargv[i])
 
 	printl( msg )//TODO Replace with Rexx pipe
 }
 
-
-void function fdLogPlayerDeath()
-{
-    logFDt("PlayerDeath")
+void function quitGameinSeconds(float seconds){
+    wait seconds
+    GetLocalClientPlayer().ClientCommand("quit")
 }
-void function fdLogWaveContains(int waveNum,string type,int count)
+void function fdLogPlayerDeath(float time)
 {
-    logFDt("WaveContains waveNum:",waveNum,"type:",type,"count:",count)
+    logFDt(time,"PlayerDeath")
 }
-void function fdLogWaveComplete()
+void function fdLogWaveContains(int waveNum,string type,int count,float time)
 {
-    logFDt("WaveComplete")
+    logFDt(time,"WaveContains waveNum:",waveNum,"type:",type,"count:",count)
 }
-void function fdLogWaveRestarting()
+void function fdLogWaveComplete(float time)
 {
-    logFDt("WaveRestart")
+    logFDt(time,"WaveComplete")
+    thread quitGameinSeconds(0.1)
 }
-void function fdLogPingMinimap(float x,float y,float duration,float spreadRadius,float ringRadius,int colorIndex)
+void function fdLogWaveRestarting(float time)
 {
-    logFDt("PingMinimap pos:",x,y,"duration:",duration,"spread:",spreadRadius,"ringRadius:",ringRadius,"color:",colorIndex)
+    logFDt(time,"WaveRestart")
 }
-void function fdLogWaveStarting(int currentWave)
+void function fdLogPingMinimap(float x,float y,float duration,float spreadRadius,float ringRadius,int colorIndex,float time)
 {
-    logFDt("WaveStarting wave:",currentWave)
+    logFDt(time,"PingMinimap pos:",x,y,"duration:",duration,"spread:",spreadRadius,"ringRadius:",ringRadius,"color:",colorIndex)
 }
-void function fdLogUpdateWaveInfo(int waveNum,string difficultyString,string waveStatus,string levelName)
+void function fdLogWaveStarting(int currentWave,float time)
 {
-    logFDt("UpdateWaveInfo waveNum:",waveNum,"difficultyString:",difficultyString,"waveString:",waveStatus,"levelName:",levelName)
+    logFDt(time,"WaveStarting wave:",currentWave)
 }
-void function fdLogDropPod(vector pos)
+void function fdLogUpdateWaveInfo(int waveNum,string difficultyString,string waveStatus,string levelName,float time)
 {
-    logFDt("NewDropPod pos:",pos)
+    logFDt(time,"UpdateWaveInfo waveNum:",waveNum,"difficultyString:",difficultyString,"waveString:",waveStatus,"levelName:",levelName)
 }
-void function fdLogPos(int id,vector pos,vector ang)
+void function fdLogDropPod(int id,vector pos,float time)
 {
-    logFDt("PosUpdate id:",id,"pos:",pos,"ang:",ang)
+    logFDt(time,"NewDropPod id:",id,"pos:",pos)
+    
 }
-void function fdLogDeath(int id)
+void function fdLogPos(int id,vector pos,vector ang,float time)
 {
-    logFDt("Death id:",id)
+    logFDt(time,"PosUpdate id:",id,"pos:",pos,"ang:",ang)
 }
-void function fdLogShieldDome(vector pos)
+void function fdLogDeath(int id,float time)
 {
-    logFDt("NewDomeEntity pos:",pos)
+    logFDt(time,"Death id:",id)
 }
-void function fdLogPropDynamic(vector pos,asset model)
+void function fdLogShieldDome(vector pos,float time)
 {
-    logFDt("NewPropDynamic pos:",pos,"model:",model)
+    
+    logFDt(time,"NewDomeEntity pos:",pos)
 }
-void function fdLogTraceVolume(int id,vector pos,string KVs)
+void function fdLogPropDynamic(vector pos,asset model,float time)
 {
-	logFDt("TraceBlocker ",id,"pos:",pos)
-    logFDt("KVsOfEntity entID:",id,KVs)
+    
+    logFDt(time,"NewPropDynamic pos:",pos,"model:",model)
 }
-void function fdLogNewEntity(int id,string className,string target,var signifier,asset model,vector pos,vector ang,string KVs)
+void function fdLogTraceVolume(int id,vector pos,string KVs,float time)
 {
-    logFDt("NewEntity id:",id,"class:",className,"target:",target,"signifier:",signifier,"model:",model ,"pos:",pos,"ang:",ang)
-	logFDt("KVsOfEntity entID:",id,KVs)
+	
+    logFDt(time,"TraceBlocker ",id,"pos:",pos)
+    logFDt(time,"KVsOfEntity entID:",id,KVs)
 }
-void function fdLogNewTitan(int id,string target,asset model,int team,vector pos,vector ang,string KVs)
+void function fdLogNewEntity(int id,string className,string target,var signifier,asset model,vector pos,vector ang,string KVs,float time)
 {
-    logFDt("NewEntityTitan id:",id,"target:",target,"model:",model,"team:",team,"pos:",pos,"ang:",ang)
-	logFDt("KVsOfEntity entID:",id,KVs)
+    
+    logFDt(time,"NewEntity id:",id,"class:",className,"target:",target,"signifier:",signifier,"model:",model ,"pos:",pos,"ang:",ang)
+	logFDt(time,"KVsOfEntity entID:",id,KVs)
 }
-void function fdLogNewHuman(int id,var signifier,asset model,vector pos,vector ang,string KVs)
-{
-    logFDt("NewEntityHuman id:",id,"signifier:",signifier,"model:",model,"pos:",pos,"ang:",ang)
-	logFDt("KVsOfEntity entID:",id,KVs)
+void function fdLogNewTitan(int id,string target,asset model,int team,vector pos,vector ang,string KVs,float time)
+{   
+    
+    logFDt(time,"NewEntityTitan id:",id,"target:",target,"model:",model,"team:",team,"pos:",pos,"ang:",ang)
+	logFDt(time,"KVsOfEntity entID:",id,KVs)
 }
-void function fdLogUncapturedEnt(int id,string className,string target,var signifier,asset model,vector pos,vector ang,string KVs)
+void function fdLogNewHuman(int id,var signifier,asset model,vector pos,vector ang,string KVs,float time)
 {
-    logFDt("NewUncapturedEntity id:",id,"class:",className,"target:",target,"signifier:",signifier,"model:",model ,"pos:",pos,"ang:",ang)
-    logFDt("KVsOfEntity entID:",id,KVs)
+    logFDt(time,"NewEntityHuman id:",id,"signifier:",signifier,"model:",model,"pos:",pos,"ang:",ang)
+	logFDt(time,"KVsOfEntity entID:",id,KVs)
 }
-void function fdLogMoney(int money,int money256)
+void function fdLogUncapturedEnt(int id,string className,string target,var signifier,asset model,vector pos,vector ang,string KVs,float time)
 {
-    logFDt("PlayerMoney money:",(money + (money256 * 256)) )
+    logFDt(time,"NewUncapturedEntity id:",id,"class:",className,"target:",target,"signifier:",signifier,"model:",model ,"pos:",pos,"ang:",ang)
+    logFDt(time,"KVsOfEntity entID:",id,KVs)
 }
-void function fdLogTeamScore(int score,int score256)
+void function fdLogMoney(int money,int money256,float time)
 {
-     logFDt("TeamScore score:",(score + ( 256 * score256 )) )  
+    logFDt(time,"PlayerMoney money:",(money + (money256 * 256)) )
 }
-void function PrintWeapon(entity weapon)
+void function fdLogTeamScore(int score,int score256,float time)
 {
-	WaitFrame()
+     logFDt(time,"TeamScore score:",(score + ( 256 * score256 )) )  
+}
+void function PrintWeapon(entity weapon,float time)
+{   
+    
+    if(!IsValid(weapon))
+        return
 	entity entParent = weapon.GetParent()
 	if(IsValid(entParent))
-		logFDt("NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",weapon.GetWeaponClassName())
+		logFDt(time,"NewWeapon entID:",entParent.GetEntIndex(),"weaponName:",weapon.GetWeaponClassName())
     else
-        logFDt("NewWeapon weaponName:",weapon.GetWeaponClassName())
+        logFDt(time,"NewWeapon weaponName:",weapon.GetWeaponClassName())
 }
 
 
@@ -138,8 +150,8 @@ void function logNetworkVariables(){
         return
 
     while(true){
-        fdLogMoney(GetGlobalNetInt("FD_money"),GetGlobalNetInt("FD_money256"))
-        fdLogTeamScore(GetGlobalNetInt( "FD_wavePoints" ) ,GetGlobalNetInt( "FD_wavePoints256" ) )
+        fdLogMoney(GetGlobalNetInt("FD_money"),GetGlobalNetInt("FD_money256"),Time())
+        fdLogTeamScore(GetGlobalNetInt( "FD_wavePoints" ) ,GetGlobalNetInt( "FD_wavePoints256" ) ,Time())
         wait 1
     }
 }
@@ -151,46 +163,50 @@ void function LogNewEntity(entity ent){
 	{
 		return
 	}
-	
+    float time = Time()
+	WaitFrame()
 	switch(ent.GetSignifierName())
 	{
 		
 		case"trace_volume":
-            fdLogTraceVolume(ent.GetEntIndex(),ent.GetOrigin(),getKVString(ent))
+            fdLogTraceVolume(ent.GetEntIndex(),ent.GetOrigin(),getKVString(ent),time)
+            
 		case"prop_dynamic":
 			switch(ent.GetModelName())
 			{
 				case$"models/fx/xo_shield.mdl":
-					fdLogDropPod(ent.GetOrigin())
+					fdLogShieldDome(ent.GetOrigin(),time)
 					return
 				case$"models/vehicle/droppod_fireteam/droppod_fireteam.mdl":
-					fdLogDropPod(ent.GetOrigin())
+					fdLogDropPod(ent.GetEntIndex(),ent.GetOrigin(),time)
+                    thread TrackEntity_threaded(ent)
 					return
 			}
-			fdLogPropDynamic(ent.GetOrigin(),ent.GetModelName())
+			fdLogPropDynamic(ent.GetOrigin(),ent.GetModelName(),time)
 			return
 		case"npc_drone":
 		case"npc_frag_drone":
 		case"npc_super_spectre":
 			//generic entity
-            fdLogNewEntity(ent.GetEntIndex(),ent.GetClassName(),ent.GetTargetName(),ent.GetSignifierName(),ent.GetModelName(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent))
-            thread TrackEntity_threaded(ent)
+            fdLogNewEntity(ent.GetEntIndex(),ent.GetClassName(),ent.GetTargetName(),ent.GetSignifierName(),ent.GetModelName(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent),time)
+            thread TrackNPC_threaded(ent)
 			return
 		case"npc_titan":
 			//titan entity
-			fdLogNewTitan(ent.GetEntIndex(),ent.GetTargetName(),ent.GetModelName(),ent.GetTeam(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent))
-            thread TrackEntity_threaded(ent)
+			fdLogNewTitan(ent.GetEntIndex(),ent.GetTargetName(),ent.GetModelName(),ent.GetTeam(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent),time)
+            thread TrackNPC_threaded(ent)
 			return
 		case"npc_spectre":
 		case"npc_soldier":
 		case"npc_stalker":
 			//human sized entity with variation
-			fdLogNewHuman(ent.GetEntIndex(),ent.GetSignifierName(),ent.GetModelName(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent))
-            thread TrackEntity_threaded(ent)
+			fdLogNewHuman(ent.GetEntIndex(),ent.GetSignifierName(),ent.GetModelName(),ent.GetOrigin(),ent.GetAngles(),getKVString(ent),time)
+            thread TrackNPC_threaded(ent)
 			return
 		case"weaponx":
 			//log new weapon
-			thread PrintWeapon(ent) //else Weapons might get printed before Parents
+            WaitFrame()
+			PrintWeapon(ent,time) 
 			return
 		case"titan_soul":
 		case"info_hardpoint":
@@ -451,7 +467,7 @@ string function getKVString(entity ent)
 	return ret
 }
 
-void function TrackEntity_threaded(entity ent)
+void function TrackNPC_threaded(entity ent)
 {	
 	if( !IsNewThread())
 		return
@@ -462,9 +478,30 @@ void function TrackEntity_threaded(entity ent)
 	
 	while(IsAlive(ent))
 	{
-		fdLogPos(EntID,ent.GetOrigin(),ent.GetAngles())
+		fdLogPos(EntID,ent.GetOrigin(),ent.GetAngles(),Time())
 		
 		WaitFrame()
 	}
-	fdLogDeath(EntID)
+	fdLogDeath(EntID,Time())
 }
+
+void function TrackEntity_threaded(entity ent)
+{	
+	if( !IsNewThread())
+		return
+	if(!IsValid(ent))
+		return
+	
+	int EntID = ent.GetEntIndex()
+	
+	while(IsValid(ent))
+	{
+		fdLogPos(EntID,ent.GetOrigin(),ent.GetAngles(),Time())
+		
+		WaitFrame()
+	}
+	fdLogDeath(EntID,Time()) //death equals removal for not alive tracked entitys
+}
+
+
+

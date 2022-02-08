@@ -221,7 +221,7 @@ void function ClientCodeCallback_OnEntityCreation( entity ent )
         return
 	}
 	
-	LogNewEntity(ent)
+	thread LogNewEntity(ent)
 
 	PerfStart( PerfIndexClient.OnEntityCreation )
 
@@ -513,7 +513,7 @@ function RunKillReplayEndedCallbacks()
 void function ServerCallback_YouRespawned()
 {
 	clGlobal.levelEnt.Signal( "LocalClientPlayerRespawned" )
-	fdLogPlayerDeath()
+	
 	entity clientPlayer = GetLocalClientPlayer()
 	StopPlayerDeathSound( clientPlayer )
 
@@ -528,7 +528,7 @@ void function ServerCallback_YouDied( int attackerEHandle, float healthFrac, int
 	printt( "ServerCallback_YouDied() healthFrac: " + healthFrac )
 	entity clientPlayer = GetLocalClientPlayer()
 	PlayPlayerDeathSound( clientPlayer )
-
+	fdLogPlayerDeath(Time())
 	entity attacker = GetHeavyWeightEntityFromEncodedEHandle( attackerEHandle )
 	if ( IsValid( attacker ) )
 	{
